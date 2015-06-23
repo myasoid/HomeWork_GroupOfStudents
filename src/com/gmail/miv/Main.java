@@ -11,17 +11,13 @@ public class Main {
 
         Group group = null;
 
-        try {
-            FileInputStream fileIn = new FileInputStream("./tmp/group.ser");
+        String fileName = "./tmp/group.ser";
+
+        try (FileInputStream fileIn = new FileInputStream(fileName)){
             ObjectInputStream in = new ObjectInputStream(fileIn);
             group = (Group) in.readObject();
-            in.close();
-            fileIn.close();
-        } catch (IOException i) {
-            i.printStackTrace();
-        } catch (ClassNotFoundException c) {
-            System.out.println("Employee class not found");
-            c.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         if (group == null) {
@@ -100,14 +96,12 @@ public class Main {
 
         }
 
-        try (FileOutputStream fileOut = new FileOutputStream("./tmp/group.ser")) {
+        try (FileOutputStream fileOut = new FileOutputStream(fileName)) {
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(group);
-            out.close();
-            fileOut.close();
-            System.out.printf("Serialized data is saved in /tmp/group.ser");
-        } catch (IOException i) {
-            i.printStackTrace();
+            System.out.printf("Serialized data is saved in " + fileName);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
 
