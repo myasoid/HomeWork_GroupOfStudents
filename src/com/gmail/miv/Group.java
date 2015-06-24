@@ -1,16 +1,29 @@
 package com.gmail.miv;
 
 
-import java.io.Serializable;
+import javax.xml.bind.annotation.*;
 import java.util.Arrays;
 
-public class Group implements Serializable{
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Group")
+public class Group {
 
+
+    @XmlAttribute
     private String description;
+    @XmlAttribute
     private int lenth = 0;
-    Student[] students = new Student[10];
+    @XmlElement(name = "Student", nillable = true)
+    @XmlElementWrapper(name = "Students")
+    private Student[] students = new Student[10];
+
+    public Group() {
+
+    }
 
     public Group(String description) {
+
         this.description = description;
     }
 
@@ -61,19 +74,18 @@ public class Group implements Serializable{
 
     }
 
-    public void deleteStudent(int index) throws GroupIndexOutOfBoundsException{
+    public void deleteStudent(int index) throws GroupIndexOutOfBoundsException {
 
-        if (index >= 0 && index < students.length)
-        {
-            Student[] copy = new Student[students.length-1];
+        if (index >= 0 && index < students.length) {
+            Student[] copy = new Student[students.length];
             System.arraycopy(students, 0, copy, 0, index);
-            System.arraycopy(students, index+1, copy, index, students.length-index-1);
+            System.arraycopy(students, index + 1, copy, index, students.length - index - 1);
             students = copy;
         }
-        lenth --;
+        lenth--;
     }
 
-    public void sortGroup() throws GroupIndexOutOfBoundsException{
+    public void sortGroup() {
         Arrays.sort(students, 0, lenth);
     }
 
@@ -93,7 +105,7 @@ public class Group implements Serializable{
         this.lenth = lenth;
     }
 
-    public String getInfo(){
+    public String getInfo() {
 
         String result = "Group " + description + ":\n";
 
@@ -102,6 +114,6 @@ public class Group implements Serializable{
                 result += " " + i + " : " + students[i].getInfo() + "\n";
             }
         }
-        return  result;
+        return result;
     }
 }

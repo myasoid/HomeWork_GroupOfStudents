@@ -1,26 +1,39 @@
 package com.gmail.miv;
 
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import java.io.*;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    final static String PACKAGE = Main.class.getPackage().getName();
 
+    public static void main(String[] args) {
 
         Group group = null;
 
-        String fileName = "./tmp/group.ser";
+        String fileName = "./tmp/group.xml";
 
-        try (FileInputStream fileIn = new FileInputStream(fileName)){
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            group = (Group) in.readObject();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        File file = new File(fileName);
 
-        if (group == null) {
+        if (file.exists()) {
+            try {
+
+                JAXBContext jc = JAXBContext.newInstance(Main.PACKAGE);
+
+                Unmarshaller um = jc.createUnmarshaller();
+
+                group = (Group) um.unmarshal(file);
+
+            } catch (JAXBException e) {
+                e.printStackTrace();
+                return;
+            }
+        } else {
             group = new Group("Some group");
         }
 
@@ -72,6 +85,7 @@ public class Main {
                         int index = sc.nextInt();
 
                         group.deleteStudent(index);
+
                     } catch (GroupIndexOutOfBoundsException e) {
                         e.printStackTrace();
                     }
@@ -96,11 +110,16 @@ public class Main {
 
         }
 
-        try (FileOutputStream fileOut = new FileOutputStream(fileName)) {
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(group);
-            System.out.printf("Serialized data is saved in " + fileName);
-        } catch (Exception e) {
+        try {
+
+            JAXBContext jc = JAXBContext.newInstance(Main.PACKAGE);
+
+            Marshaller m = jc.createMarshaller();
+
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            m.marshal(group, file);
+
+        } catch (JAXBException e) {
             e.printStackTrace();
         }
 

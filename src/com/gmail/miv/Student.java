@@ -1,11 +1,14 @@
 package com.gmail.miv;
 
 
-import java.io.Serializable;
-
-public class Student extends Human implements Comparable, Serializable {
+public class Student extends Human implements Comparable {
 
     private String specialization;
+
+    public Student() {
+        super();
+    }
+
 
     public Student(String name, String secondName, String specialization) {
         super(name, secondName);
@@ -33,14 +36,14 @@ public class Student extends Human implements Comparable, Serializable {
     @Override
     public int compareTo(Object o) {
 
-        if (o == null){
+        if (o == null) {
             return -1;
         }
 
         Student s = (Student) o;
         int result = 0;
         result = this.getSecondName().compareTo(s.getSecondName());
-        if (result == 0){
+        if (result == 0) {
             result = this.getName().compareTo(s.getName());
         }
         return result;

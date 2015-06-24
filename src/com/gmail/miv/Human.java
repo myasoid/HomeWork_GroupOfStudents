@@ -1,15 +1,16 @@
 package com.gmail.miv;
 
 
-import java.io.Serializable;
-
-abstract public class Human implements Serializable{
+abstract public class Human {
 
     private String name;
     private String secondName;
 
     public String getName() {
         return name;
+    }
+
+    public Human() {
     }
 
     public void setName(String name) {
