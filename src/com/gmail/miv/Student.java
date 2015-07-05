@@ -9,7 +9,6 @@ public class Student extends Human implements Comparable {
         super();
     }
 
-
     public Student(String name, String secondName, String specialization) {
         super(name, secondName);
 
@@ -17,10 +16,8 @@ public class Student extends Human implements Comparable {
     }
 
     @Override
-    public String getInfo() {
-        return "Student{" +
-                "name='" + super.getName() + '\'' +
-                "secondName='" + super.getSecondName() + '\'' +
+    public String toString() {
+        return "Student{" + super.toString() +
                 "specialization='" + specialization + '\'' +
                 '}';
     }
@@ -31,6 +28,25 @@ public class Student extends Human implements Comparable {
 
     public void setSpecialization(String specialization) {
         this.specialization = specialization;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Student student = (Student) o;
+
+        return !(specialization != null ? !specialization.equals(student.specialization) : student.specialization != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (specialization != null ? specialization.hashCode() : 0);
+        return result;
     }
 
     @Override
@@ -48,4 +64,5 @@ public class Student extends Human implements Comparable {
         }
         return result;
     }
+
 }

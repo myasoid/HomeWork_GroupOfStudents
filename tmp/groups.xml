@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<listOfGroups>
+    <List>
+        <Group id="1" description="Group A">
+            <Students>
+                <Student>
+                    <name>Timothy</name>
+                    <secondName>Barker</secondName>
+                    <specialization>spec</specialization>
+                </Student>
+                <Student>
+                    <name>David</name>
+                    <secondName>Glenn</secondName>
+                    <specialization>spec</specialization>
+                </Student>
+            </Students>
+        </Group>
+        <Group id="2" description="Group B">
+            <Students>
+                <Student>
+                    <name>Dennis</name>
+                    <secondName>Collins</secondName>
+                    <specialization>ppp</specialization>
+                </Student>
+                <Student>
+                    <name>Ronald</name>
+                    <secondName>Johns</secondName>
+                    <specialization>ppp</specialization>
+                </Student>
+                <Student>
+                    <name>Claire</name>
+                    <secondName>Johns</secondName>
+                    <specialization>ppp</specialization>
+                </Student>
+            </Students>
+        </Group>
+    </List>
+</listOfGroups>
