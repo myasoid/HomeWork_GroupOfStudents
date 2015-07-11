@@ -6,6 +6,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.*;
 
 public class Main {
@@ -141,7 +143,34 @@ public class Main {
 
         saveDataToFile();
 
+        currentGroup = groups.getGroupByID(1);
+        String ansver = "<html><head><title>" + currentGroup.getDescription() + "</title> <meta charset='utf-8'></head><body><p>Список студентов группы: "
+                + currentGroup.getDescription() + "</p><br>";
+        ansver += "<table border='2' cellpadding='5' ><tr><th>Фамилия</th><th>Имя</th><th>Специализация</th></tr>";
+        List<Student> students = currentGroup.getStudends();
+
+
+        for (int i = 0; i < students.size(); i++) {
+            ansver += "<tr>";
+            ansver += "<td>" + students.get(i).getSecondName() + "</td>";
+            ansver += "<td>" + students.get(i).getName() + "</td>";
+            ansver += "<td>" + students.get(i).getSpecialization() + "</td>";
+            ansver += "</tr>";
+        }
+        ansver += "</table></body></html>";
+        // Генерируем html файл (строку) с данными группы
+        try (ServerSocket soc = new ServerSocket(8080)) {
+            for (; ; ) {
+                Socket clisoc = soc.accept();
+                Client cli = new Client(clisoc, ansver);
+            }
+        } catch (IOException e) {
+            System.out.println("Error to server Socket Open!!!");
+        }
+
+
     }
+
 
     private static int getOption() {
 

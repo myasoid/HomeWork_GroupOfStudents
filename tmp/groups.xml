@@ -13,6 +13,21 @@
                     <secondName>Glenn</secondName>
                     <specialization>spec</specialization>
                 </Student>
+                <Student>
+                    <name>Dennis</name>
+                    <secondName>Collins</secondName>
+                    <specialization>ppp</specialization>
+                </Student>
+                <Student>
+                    <name>Ronald</name>
+                    <secondName>Johns</secondName>
+                    <specialization>ppp</specialization>
+                </Student>
+                <Student>
+                    <name>Claire</name>
+                    <secondName>Johns</secondName>
+                    <specialization>ppp</specialization>
+                </Student>
             </Students>
         </Group>
         <Group id="2" description="Group B">

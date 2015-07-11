@@ -64,6 +64,9 @@ public class Group {
         this.id = id;
     }
 
+    public List<Student> getStudends(){
+        return students;
+    }
     public void addStudent(Student student) throws GroupIndexOutOfBoundsException {
 
         try {
